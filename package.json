@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
+    "build": "echo 'No build step required'",
     "test:token": "node test/01_token_test.js",
     "test:refresh": "node test/02_refresh_test.js",
     "test:all": "npm run test:token && npm run test:refresh"
@@ -18,7 +19,7 @@
     "node-fetch": "^2.7.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.1.10"
   },
   "keywords": [
     "jwt",

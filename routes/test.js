@@ -11,8 +11,8 @@ router.get("/", (req, res) => {
     data: {
       status: "OK",
       server: "JWT Mock Server",
-      version: "1.0.0"
-    }
+      version: "1.0.0",
+    },
   });
 });
 

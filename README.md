@@ -33,6 +33,31 @@ npm run test:refresh
 npm run test:all
 ```
 
+## Vercel 배포
+
+### 1. Vercel CLI 설치
+```bash
+npm install -g vercel
+```
+
+### 2. Vercel 로그인
+```bash
+vercel login
+```
+
+### 3. 프로젝트 배포
+```bash
+vercel
+```
+
+### 4. 환경 변수 설정
+Vercel 대시보드에서 다음 환경 변수를 설정하세요:
+- `JWT_SECRET`: JWT 서명용 시크릿 키
+- `PORT`: 포트 번호 (선택사항)
+
+### 5. 자동 배포
+GitHub 저장소와 연결하면 자동으로 배포됩니다.
+
 ## API 엔드포인트
 
 ### 1. 로그인 (토큰 발급)
