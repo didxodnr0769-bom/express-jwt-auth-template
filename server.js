@@ -1,9 +1,9 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const jwt = require("jsonwebtoken");
 const config = require("./config");
 const authRoutes = require("./routes/auth");
+const testRoutes = require("./routes/test");
 
 const app = express();
 
@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // 라우트 설정
 app.use("/api/auth", authRoutes);
+app.use("/api/test", testRoutes);
 
 // 기본 라우트
 app.get("/", (req, res) => {
@@ -24,6 +25,7 @@ app.get("/", (req, res) => {
       login: "POST /api/auth/login",
       refresh: "POST /api/auth/refresh",
       verify: "GET /api/auth/verify",
+      test: "GET /api/test",
     },
   });
 });
@@ -54,4 +56,5 @@ app.listen(PORT, () => {
   console.log(`   - POST /api/auth/login (로그인)`);
   console.log(`   - POST /api/auth/refresh (토큰 갱신)`);
   console.log(`   - GET /api/auth/verify (토큰 검증)`);
+  console.log(`   - GET /api/test (테스트)`);
 });
