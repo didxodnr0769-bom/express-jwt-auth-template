@@ -7,7 +7,7 @@ const router = express.Router();
 
 // 임시 사용자 데이터
 const MOCK_USER = {
-  id: "test",
+  email: "test@example.com",
   password: "test",
   name: "Test User",
 };
@@ -15,22 +15,23 @@ const MOCK_USER = {
 // 로그인 엔드포인트
 router.post("/login", (req, res) => {
   try {
-    const { id, password } = req.body;
+    const { email, password } = req.body;
 
+    console.log(email, password);
     // 입력값 검증
-    if (!id || !password) {
+    if (!email || !password) {
       return res.status(400).json({
         success: false,
-        message: "아이디와 비밀번호를 입력해주세요.",
+        message: "이메일과 비밀번호를 입력해주세요.",
         code: "MISSING_CREDENTIALS",
       });
     }
 
     // 사용자 인증
-    if (id !== MOCK_USER.id || password !== MOCK_USER.password) {
+    if (email !== MOCK_USER.email || password !== MOCK_USER.password) {
       return res.status(401).json({
         success: false,
-        message: "아이디 또는 비밀번호가 올바르지 않습니다.",
+        message: "이메일 또는 비밀번호가 올바르지 않습니다.",
         code: "INVALID_CREDENTIALS",
       });
     }
@@ -38,7 +39,7 @@ router.post("/login", (req, res) => {
     // JWT 토큰 생성
     const accessToken = jwt.sign(
       {
-        id: MOCK_USER.id,
+        email: MOCK_USER.email,
         name: MOCK_USER.name,
         type: "access",
       },
@@ -48,7 +49,7 @@ router.post("/login", (req, res) => {
 
     const refreshToken = jwt.sign(
       {
-        id: MOCK_USER.id,
+        email: MOCK_USER.email,
         type: "refresh",
       },
       config.JWT_SECRET,
@@ -62,7 +63,7 @@ router.post("/login", (req, res) => {
         accessToken,
         refreshToken,
         user: {
-          id: MOCK_USER.id,
+          email: MOCK_USER.email,
           name: MOCK_USER.name,
         },
         expiresIn: config.ACCESS_TOKEN_EXPIRE,
@@ -120,7 +121,7 @@ router.post("/refresh", (req, res) => {
       // 새로운 액세스 토큰 생성
       const newAccessToken = jwt.sign(
         {
-          id: decoded.id,
+          email: decoded.email,
           name: MOCK_USER.name,
           type: "access",
         },
