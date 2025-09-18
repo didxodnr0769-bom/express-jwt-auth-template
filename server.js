@@ -26,6 +26,7 @@ app.get("/", (req, res) => {
       refresh: "POST /api/auth/refresh",
       verify: "GET /api/auth/verify",
       test: "GET /api/test",
+      testAuth: "GET /api/test/auth (토큰 필요)",
     },
   });
 });
@@ -57,4 +58,5 @@ app.listen(PORT, () => {
   console.log(`   - POST /api/auth/refresh (토큰 갱신)`);
   console.log(`   - GET /api/auth/verify (토큰 검증)`);
   console.log(`   - GET /api/test (테스트)`);
+  console.log(`   - GET /api/test/auth (토큰 필요)`);
 });
